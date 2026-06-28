@@ -223,7 +223,7 @@ body.admin-editing .admin-imgbox:hover{outline:2px solid #1a6ab1}
   <div class="mc-body">
     <div class="mc-flag">🇵🇭</div>
     <div class="mc-title">Domestic Travel FAQ</div>
-    <div class="mc-sub">Sales Agent Guide · All Destinations</div>
+    <div class="mc-sub">Sales Agent Guide</div>
     <div class="mc-pills">
       <span class="mc-pill">🏝 El Nido</span>
       <span class="mc-pill">🌊 Boracay</span>
@@ -970,7 +970,7 @@ body.admin-editing .admin-imgbox:hover{outline:2px solid #1a6ab1}
         <p><b>Best For:</b> Couples, Honeymooners, guests who prefer a relaxing sightseeing day</p>
       </div>
     </div>
-    <div class="qa-block">
+    <div class="qa-block open">
       <div class="qa-header" onclick="tog(this)"><div class="qa-num">8</div><div class="qa-question">May additional charges ba na dapat sabihin sa guest?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
@@ -1455,10 +1455,7 @@ window.addEventListener('scroll', () => {
     var img=box.querySelector('img'); if(!img) return;
     box.addEventListener('click',function(e){
       if(!editing) return;
-      // Let clicks on editable text pass through
       if(e.target.closest('[contenteditable="true"]')) return;
-      // Also let clicks on the overlay text area pass through
-      if(e.target.closest('.tc-overlay,.tc-name,.tc-badge,.dest-hero-overlay,.photo-cap')) return;
       e.preventDefault(); e.stopImmediatePropagation();
       openImgEditor(img);
     },true);
