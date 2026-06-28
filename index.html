@@ -1455,7 +1455,10 @@ window.addEventListener('scroll', () => {
     var img=box.querySelector('img'); if(!img) return;
     box.addEventListener('click',function(e){
       if(!editing) return;
+      // Let clicks on editable text pass through
       if(e.target.closest('[contenteditable="true"]')) return;
+      // Also let clicks on the overlay text area pass through
+      if(e.target.closest('.tc-overlay,.tc-name,.tc-badge,.dest-hero-overlay,.photo-cap')) return;
       e.preventDefault(); e.stopImmediatePropagation();
       openImgEditor(img);
     },true);
