@@ -161,6 +161,46 @@ p{margin:6px 0;font-size:12.5px;}
   .mc-title{font-size:30px;}
 }
 </style>
+<style id="admin-styles">
+#adminBar{position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#0d1b2e;color:#fff;display:none;align-items:center;gap:10px;padding:10px 16px;font-family:'Inter',sans-serif;font-size:13px;box-shadow:0 -2px 14px rgba(0,0,0,.3)}
+#adminBar.show{display:flex}
+#adminBar strong{font-weight:700;letter-spacing:.02em}
+#adminBar .sp{flex:1}
+#adminBar button{font-family:inherit;font-size:13px;font-weight:600;border:none;border-radius:7px;padding:8px 14px;cursor:pointer}
+#adminBar button:disabled{opacity:.55;cursor:default}
+#adminBar .b-edit{background:#1a6ab1;color:#fff}
+#adminBar .b-save{background:#1a9a50;color:#fff}
+#adminBar .b-cancel{background:transparent;color:#cdd5e0;border:1px solid #3a4a60}
+#adminBar input{font-family:inherit;font-size:13px;padding:7px 10px;border-radius:7px;border:1px solid #3a4a60;background:#16263c;color:#fff}
+#adminBar input::placeholder{color:#7e90a8}
+#adminBar .status{font-size:12px;color:#9fb3c8}
+body.admin-editing{padding-bottom:60px}
+body.admin-editing [contenteditable="true"]{outline:1.5px dashed rgba(26,106,177,.5);outline-offset:2px;border-radius:3px;cursor:text}
+body.admin-editing [contenteditable="true"]:hover{outline-color:rgba(26,106,177,.85)}
+body.admin-editing [contenteditable="true"]:focus{outline:2px solid #1a6ab1;outline-offset:2px;background:rgba(26,106,177,.18)}
+body.admin-editing .qa-block .qa-body{display:block !important}
+body.admin-editing .admin-imgbox{cursor:pointer;outline:2px dashed rgba(26,106,177,.7);outline-offset:-2px}
+body.admin-editing .admin-imgbox:hover{outline:2px solid #1a6ab1}
+#adminImgModal{position:fixed;inset:0;z-index:100000;background:rgba(8,18,36,.66);display:none;align-items:center;justify-content:center;padding:18px;font-family:'Inter',sans-serif}
+#adminImgModal.show{display:flex}
+#adminImgModal .aim-box{background:#fff;border-radius:14px;width:100%;max-width:440px;padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+#adminImgModal .aim-title{font-size:15px;font-weight:700;color:#1a2e4a;margin-bottom:12px}
+#adminImgModal label{display:block;font-size:11px;font-weight:600;color:#8a8780;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+#adminImgModal input{width:100%;font-family:inherit;font-size:13px;padding:9px 11px;border:1px solid #d8d5cc;border-radius:8px;color:#1a1a18}
+#adminImgModal input:focus{outline:2px solid #1a6ab1;border-color:#1a6ab1}
+#adminImgModal .aim-prev{margin-top:12px;height:150px;border-radius:9px;overflow:hidden;background:#f0ede6;display:flex;align-items:center;justify-content:center}
+#adminImgModal .aim-prev img{width:100%;height:100%;object-fit:cover}
+#adminImgModal .aim-prev .aim-ph{font-size:12px;color:#9a9890}
+#adminImgModal .aim-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+#adminImgModal button{font-family:inherit;font-size:13px;font-weight:600;border:none;border-radius:8px;padding:9px 16px;cursor:pointer}
+#adminImgModal .aim-apply{background:#1a6ab1;color:#fff}
+#adminImgModal .aim-cancel{background:#f0ede6;color:#46443c}
+#adminImgModal .aim-or{text-align:center;font-size:11px;color:#9a9890;margin:10px 0 8px;text-transform:uppercase;letter-spacing:.08em}
+#adminImgModal .aim-upload{width:100%;background:#eef5ff;color:#1a3a6a;border:1px solid #bcd6f2}
+#adminImgModal .aim-upload:hover{background:#e0edfb}
+#adminImgModal .aim-note{font-size:12px;color:#1a7a40;margin-top:8px;min-height:16px}
+#adminImgModal .aim-note.err{color:#cc2a2a}
+</style>
 </head>
 <body>
 
@@ -178,9 +218,7 @@ p{margin:6px 0;font-size:12.5px;}
 
 <div class="booklet">
 
-<!-- ══════════════════════════════════════
-     MASTER COVER
-══════════════════════════════════════ -->
+<!-- MASTER COVER -->
 <div class="master-cover" id="cover">
   <img class="mc-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/El_Nido_bay_and_beach_-_Palawan_Philippines_(6984701226).jpg/800px-El_Nido_bay_and_beach_-_Palawan_Philippines_(6984701226).jpg" alt="Philippines" onerror="this.style.opacity=0">
   <div class="mc-body">
@@ -230,13 +268,12 @@ p{margin:6px 0;font-size:12.5px;}
 ══════════════════════════════════════ -->
 <div class="dest-section c-elnido" id="elnido">
   <div class="dest-hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/El_Nido_bay_and_beach_-_Palawan_Philippines_(6984701226).jpg/800px-El_Nido_bay_and_beach_-_Palawan_Philippines_(6984701226).jpg" alt="El Nido" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Nacpan_Beach,_El_Nido,_Palawan.jpg/800px-Nacpan_Beach,_El_Nido,_Palawan.jpg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/El_Nido_bay_and_beach_-_Palawan_Philippines_(6984701226).jpg/800px-El_Nido_bay_and_beach_-_Palawan_Philippines_(6984701226).jpg" alt="El Nido" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Nacpan_Beach,_El_Nido,_Palawan.jpg/800px-Nacpan_Beach,_El_Nido,_Palawan.jpg'">
     <div class="dest-hero-overlay">
       <h2>🏝 El Nido, Palawan</h2>
       <p class="tagline">The Lagoon Capital of the Philippines · Package 1 — 3D2N</p>
     </div>
   </div>
-
   <div class="dest-content">
     <div class="photo-strip g4">
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/El_Nido_bay_and_beach_-_Palawan_Philippines_(6984701226).jpg/800px-El_Nido_bay_and_beach_-_Palawan_Philippines_(6984701226).jpg" alt="Big Lagoon" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Big Lagoon</div></div>
@@ -244,51 +281,31 @@ p{margin:6px 0;font-size:12.5px;}
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Nacpan_Beach,_El_Nido,_Palawan.jpg/800px-Nacpan_Beach,_El_Nido,_Palawan.jpg" alt="Nacpan Beach" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Nacpan Beach</div></div>
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/El_Nido_in_Palawan.jpg/800px-El_Nido_in_Palawan.jpg" alt="Island Hopping" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Island Hopping</div></div>
     </div>
-
-    <!-- Q1 -->
     <div class="qa-block open">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">1</div>
-        <div class="qa-question">Ano ang kasama sa package?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">1</div><div class="qa-question">Ano ang kasama sa package?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
-          <li><span class="ci">✅</span><span><b>3 Days & 2 Nights</b> Hotel Accommodation</span></li>
+          <li><span class="ci">✅</span><span><b>3 Days &amp; 2 Nights</b> Hotel Accommodation</span></li>
           <li><span class="ci">✅</span><span><b>Daily Hotel Breakfast</b> (except Amakan El Nido)</span></li>
           <li><span class="ci">✅</span><span><b>Roundtrip Airport Transfers</b> — Puerto Princesa Airport ↔ Hotel ↔ Airport</span></li>
-          <li><span class="ci">✅</span><span>Hotel Taxes & Surcharges</span></li>
+          <li><span class="ci">✅</span><span>Hotel Taxes &amp; Surcharges</span></li>
           <li><span class="ci">❌</span><span>Island Hopping Tours <em>(not included — optional add-on)</em></span></li>
           <li><span class="ci">❌</span><span>Airfare</span></li>
-          <li><span class="ci">❌</span><span>Lunch & Dinner</span></li>
-          <li><span class="ci">❌</span><span>Personal Expenses & Hotel Security Deposit</span></li>
+          <li><span class="ci">❌</span><span>Lunch &amp; Dinner</span></li>
+          <li><span class="ci">❌</span><span>Personal Expenses &amp; Hotel Security Deposit</span></li>
         </ul>
         <div class="note-box"><span class="box-ico">⚠️</span> Island hopping tours are NOT included in the base package. Offer these as upsells when booking!</div>
       </div>
     </div>
-
-    <!-- Q2 -->
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">2</div>
-        <div class="qa-question">Kasama ba ang airfare?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">2</div><div class="qa-question">Kasama ba ang airfare?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
-        <ul class="check-list">
-          <li><span class="ci">❌</span><span>Airfare is <b>NOT</b> included. Land arrangement package only.</span></li>
-        </ul>
+        <ul class="check-list"><li><span class="ci">❌</span><span>Airfare is <b>NOT</b> included. Land arrangement package only.</span></li></ul>
         <div class="tip-box"><span class="box-ico">💡</span> <b>Sales Tip:</b> We can assist in booking domestic flights for a hassle-free vacation. Offer this service to the client!</div>
       </div>
     </div>
-
-    <!-- Q3 -->
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">3</div>
-        <div class="qa-question">Anong airport ang dapat i-book ng guest?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">3</div><div class="qa-question">Anong airport ang dapat i-book ng guest?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="info-box"><span class="box-ico">✈️</span> Book flights via <b>Puerto Princesa (PPS) Airport</b>. Roundtrip van transfers (PPS ↔ El Nido) are <b>already included</b> in the package.</div>
         <ul class="bullet-list">
@@ -297,14 +314,8 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
-    <!-- Q4 -->
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">4</div>
-        <div class="qa-question">Anong optional tours ang pwedeng i-avail?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">4</div><div class="qa-question">Anong optional tours ang pwedeng i-avail?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="tour-cards">
           <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/El_Nido_bay_and_beach_-_Palawan_Philippines_(6984701226).jpg/800px-El_Nido_bay_and_beach_-_Palawan_Philippines_(6984701226).jpg" alt="Tour A" onerror="this.parentElement.style.background='#0077b6'"><div class="tc-overlay"><span class="tc-badge">⭐ MOST POPULAR</span><div class="tc-name">Tour A — Big Lagoon, Secret Lagoon, Shimizu Island, 7 Commandos, Payong-Payong</div></div></div>
@@ -318,14 +329,8 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
-    <!-- Q5 -->
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">5</div>
-        <div class="qa-question">Alin ang pinaka-recommended na island hopping tour?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">5</div><div class="qa-question">Alin ang pinaka-recommended na island hopping tour?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p><b>Tour A</b> is the most popular and best for first-time visitors. It includes:</p>
         <ul class="bullet-list">
@@ -337,14 +342,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> <b>Sales Tip:</b> Upsell Tour A first — it consistently gets the best reviews and is the most photogenic. First-timers always come back with amazing photos!</div>
       </div>
     </div>
-
-    <!-- Q6 -->
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">6</div>
-        <div class="qa-question">May extra fees ba sa tours? Magkano?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">6</div><div class="qa-question">May extra fees ba sa tours? Magkano?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th>Fee</th><th>Amount</th><th>Type</th></tr>
@@ -358,14 +357,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="warn-box"><span class="box-ico">💵</span> Always advise guests to <b>bring enough cash</b>. Many establishments in El Nido accept cash only!</div>
       </div>
     </div>
-
-    <!-- Q7 -->
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">7</div>
-        <div class="qa-question">Kasama ba ang hotel pick-up at drop-off para sa tours?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">7</div><div class="qa-question">Kasama ba ang hotel pick-up at drop-off para sa tours?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Hotel pick-up is <b>FREE</b> for hotels within El Nido town proper</span></li>
@@ -374,14 +367,8 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
-    <!-- Q8 -->
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">8</div>
-        <div class="qa-question">Pwede bang sumali ang mga bata sa tours?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">8</div><div class="qa-question">Pwede bang sumali ang mga bata sa tours?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p>Yes! Children are welcome on all island hopping tours.</p>
         <ul class="bullet-list">
@@ -392,35 +379,23 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> <b>Sales Tip:</b> For families with young children, recommend Tour A or Tour D — calmer waters and beach stops make it easier for kids.</div>
       </div>
     </div>
-
-    <!-- Q9 -->
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">9</div>
-        <div class="qa-question">Ano ang dapat dalhin sa island hopping?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">9</div><div class="qa-question">Ano ang dapat dalhin sa island hopping?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
-          <li>🩱 Swimwear & extra change of clothes</li>
-          <li>👜 Waterproof dry bag & waterproof phone pouch</li>
+          <li>🩱 Swimwear &amp; extra change of clothes</li>
+          <li>👜 Waterproof dry bag &amp; waterproof phone pouch</li>
           <li>🧴 Sunscreen (apply BEFORE boarding!), hat/cap, sunglasses</li>
-          <li>👟 Aqua shoes & slippers</li>
+          <li>👟 Aqua shoes &amp; slippers</li>
           <li>💵 Cash for fees and optional activities</li>
-          <li>🔋 Power bank & portable fan</li>
+          <li>🔋 Power bank &amp; portable fan</li>
           <li>🪪 Valid ID</li>
           <li>💧 Personal drinking water</li>
         </ul>
       </div>
     </div>
-
-    <!-- Q10 -->
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">10</div>
-        <div class="qa-question">Angkop ba itong package para sa first-time visitors?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">10</div><div class="qa-question">Angkop ba itong package para sa first-time visitors?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p>Absolutely! Package 1 is perfect for guests who:</p>
         <ul class="bullet-list">
@@ -431,16 +406,9 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
-    <!-- ADDED FAQs -->
     <div style="padding:10px 16px 4px;"><div class="section-label">➕ Additional FAQs</div></div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">11</div>
-        <div class="qa-question">Ano ang pinaka-magandang oras para sa island hopping?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">11</div><div class="qa-question">Ano ang pinaka-magandang oras para sa island hopping?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p>Morning departures (7–8 AM) are strongly recommended.</p>
         <ul class="bullet-list">
@@ -451,29 +419,19 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> Advise guests to arrive at the meeting point on time. Late arrivals may miss their boat slot!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">12</div>
-        <div class="qa-question">Ano ang best season para mag-El Nido?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">12</div><div class="qa-question">Ano ang best season para mag-El Nido?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th>Season</th><th>Months</th><th>Condition</th></tr>
           <tr><td>🌤 Peak / Dry Season</td><td>November – May</td><td>Best weather, calm seas, ideal for all tours</td></tr>
-          <tr><td>🌧 Wet / Habagat</td><td>June – October</td><td>Occasional rain & rougher seas; some tours may be cancelled</td></tr>
+          <tr><td>🌧 Wet / Habagat</td><td>June – October</td><td>Occasional rain &amp; rougher seas; some tours may be cancelled</td></tr>
         </table>
         <div class="note-box"><span class="box-ico">⚠️</span> Always remind guests that tours are subject to weather and sea conditions. No-sail declarations may cancel tours.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">13</div>
-        <div class="qa-question">Pwede bang mag-combine ng dalawang island hopping tours sa isang araw?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">13</div><div class="qa-question">Pwede bang mag-combine ng dalawang island hopping tours sa isang araw?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p>Generally, <b>one tour per day</b> is recommended. Each tour takes approximately 5–7 hours including travel time.</p>
         <ul class="bullet-list">
@@ -483,13 +441,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> <b>Upsell Opportunity:</b> Suggest a longer stay so guests can experience Tour A + Tour C or Tour B on separate days!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">14</div>
-        <div class="qa-question">Ano ang hotel check-in at check-out policy?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">14</div><div class="qa-question">Ano ang hotel check-in at check-out policy?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
           <li>📅 Check-in: <b>2:00 PM – 3:00 PM</b></li>
@@ -499,7 +452,6 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
     <div class="quick-summary">
       <div class="qs-title">⚡ El Nido Quick Reference</div>
       <div class="qs-grid">
@@ -519,61 +471,45 @@ p{margin:6px 0;font-size:12.5px;}
 ══════════════════════════════════════ -->
 <div class="dest-section c-boracay" id="boracay">
   <div class="dest-hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/White_Beach,_Boracay.jpg/800px-White_Beach,_Boracay.jpg" alt="Boracay" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Nacpan_Beach,_El_Nido,_Palawan.jpg/800px-Nacpan_Beach,_El_Nido,_Palawan.jpg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/White_Beach,_Boracay.jpg/800px-White_Beach,_Boracay.jpg" alt="Boracay">
     <div class="dest-hero-overlay">
       <h2>🌊 Boracay</h2>
       <p class="tagline">World-Famous White Beach · Island Hopping · Kawa Hot Bath · Mermaid Photoshoot</p>
     </div>
   </div>
-
   <div class="dest-content">
     <div class="photo-strip g4">
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/White_Beach,_Boracay.jpg/800px-White_Beach,_Boracay.jpg" alt="White Beach"><div class="photo-cap">White Beach Station 1</div></div>
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Balicasag_Island,_Bohol.jpg/800px-Balicasag_Island,_Bohol.jpg" alt="Island Hopping" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Island Hopping Tour</div></div>
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Kawa Bath" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Kawa Hot Bath Experience</div></div>
-      <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Hot_kawa_bath_in_Boracay.jpg/800px-Hot_kawa_bath_in_Boracay.jpg" alt="Parasailing" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Water Sports</div></div>
+      <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Hot_kawa_bath_in_Boracay.jpg/800px-Hot_kawa_bath_in_Boracay.jpg" alt="Water Sports" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Water Sports</div></div>
     </div>
-
     <div class="qa-block open">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">1</div>
-        <div class="qa-question">Ano ang kasama sa package?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">1</div><div class="qa-question">Ano ang kasama sa package?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Hotel Accommodation</span></li>
-          <li><span class="ci">✅</span><span>Daily Breakfast <em>(except Budget Inns & Abozza Resort)</em></span></li>
-          <li><span class="ci">✅</span><span>Roundtrip Land & Sea Transfers — Airport ↔ Caticlan Jetty ↔ Hotel</span></li>
+          <li><span class="ci">✅</span><span>Daily Breakfast <em>(except Budget Inns &amp; Abozza Resort)</em></span></li>
+          <li><span class="ci">✅</span><span>Roundtrip Land &amp; Sea Transfers — Airport ↔ Caticlan Jetty ↔ Hotel</span></li>
           <li><span class="ci">✅</span><span><b>FREE Island Hopping Tour</b> (4–5 hours, without lunch)</span></li>
           <li><span class="ci">✅</span><span><b>Kawa Hot Bath Experience</b></span></li>
           <li><span class="ci">✅</span><span><b>FREE Mermaid Photoshoot</b> (subject to availability)</span></li>
-          <li><span class="ci">✅</span><span>Hotel Taxes & Surcharges</span></li>
+          <li><span class="ci">✅</span><span>Hotel Taxes &amp; Surcharges</span></li>
           <li><span class="ci">❌</span><span>Airfare</span></li>
           <li><span class="ci">❌</span><span>Buffet Lunch on Island Hopping</span></li>
           <li><span class="ci">❌</span><span>Hotel Security Deposit</span></li>
         </ul>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">2</div>
-        <div class="qa-question">Kasama ba ang airfare?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">2</div><div class="qa-question">Kasama ba ang airfare?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list"><li><span class="ci">❌</span><span>Airfare is <b>NOT</b> included. Land arrangement package only.</span></li></ul>
         <div class="tip-box"><span class="box-ico">💡</span> Airfare can be arranged separately upon request. Offer this to clients!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">3</div>
-        <div class="qa-question">Anong airport ang gamit at gaano katagal ang biyahe?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">3</div><div class="qa-question">Anong airport ang gamit at gaano katagal ang biyahe?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="info-box"><span class="box-ico">✈️</span> This package is based on <b>Kalibo Airport (KLO)</b>.</div>
         <div class="itinerary" style="margin-top:10px;">
@@ -582,13 +518,8 @@ p{margin:6px 0;font-size:12.5px;}
         </div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">4</div>
-        <div class="qa-question">May additional fees ba na babayaran sa Boracay?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">4</div><div class="qa-question">May additional fees ba na babayaran sa Boracay?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th>Fee</th><th>Amount</th><th>Type</th></tr>
@@ -600,16 +531,11 @@ p{margin:6px 0;font-size:12.5px;}
           <tr><td>Magic Island Entrance</td><td class="price">₱250/person</td><td>Optional</td></tr>
           <tr><td>Premium Boat Upgrade</td><td class="price">₱200/person</td><td>Optional</td></tr>
         </table>
-        <div class="note-box"><span class="box-ico">👶</span> Children <b>0–5 years old</b> are FREE for Terminal & Environmental Fees.</div>
+        <div class="note-box"><span class="box-ico">👶</span> Children <b>0–5 years old</b> are FREE for Terminal &amp; Environmental Fees.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">5</div>
-        <div class="qa-question">Libre ba ang Island Hopping? Ano ang kasama?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">5</div><div class="qa-question">Libre ba ang Island Hopping? Ano ang kasama?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Island Hopping Tour (4–5 hours)</span></li>
@@ -620,18 +546,9 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">6</div>
-        <div class="qa-question">Ano ang itinerary ng FREE Island Hopping?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">6</div><div class="qa-question">Ano ang itinerary ng FREE Island Hopping?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
-        <div class="photo-strip g2" style="margin-bottom:10px;">
-          <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Balicasag_Island,_Bohol.jpg/800px-Balicasag_Island,_Bohol.jpg" alt="Amihan" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Amihan Season (Nov–May)</div></div>
-          <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/White_Beach,_Boracay.jpg/800px-White_Beach,_Boracay.jpg" alt="Habagat"><div class="photo-cap">Habagat Season (Jun–Oct)</div></div>
-        </div>
         <p><b>🌬 Amihan Season (Nov–May):</b></p>
         <ul class="bullet-list"><li>Coral Garden → Balinghai Beach → Puka Beach → Tabon Beach → Crystal Cove</li></ul>
         <p style="margin-top:8px;"><b>🌧 Habagat Season (Jun–Oct):</b></p>
@@ -639,13 +556,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="note-box"><span class="box-ico">⚠️</span> Actual itinerary depends on <b>weather and sea conditions</b>. Always set this expectation with the guest.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">7</div>
-        <div class="qa-question">May breakfast ba ang lahat ng hotels?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">7</div><div class="qa-question">May breakfast ba ang lahat ng hotels?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">❌</span><span><b>Budget Inns / Transient Hotels</b> — NO breakfast</span></li>
@@ -655,30 +567,20 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> If the guest books a budget inn, remind them to budget for breakfast separately. Suggest nearby cafes in the area.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">8</div>
-        <div class="qa-question">Pwede bang mag-add ng optional activities?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">8</div><div class="qa-question">Pwede bang mag-add ng optional activities?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="tour-cards">
-          <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Hot_kawa_bath_in_Boracay.jpg/800px-Hot_kawa_bath_in_Boracay.jpg" alt="Parasailing" onerror="this.parentElement.style.background='#2d6a4f'"><div class="tc-overlay"><span class="tc-badge">COMBO 1A</span><div class="tc-name">Helmet Diving + Solo Parasailing — best for first-timers</div></div></div>
-          <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Helmet Diving" onerror="this.parentElement.style.background='#2d6a4f'"><div class="tc-overlay"><span class="tc-badge">COMBO 1B</span><div class="tc-name">Helmet Diving + Multi-Flyer Parasailing — couples & families</div></div></div>
-          <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/White_Beach,_Boracay.jpg/800px-White_Beach,_Boracay.jpg" alt="Banana Boat"><div class="tc-overlay"><span class="tc-badge">COMBO 2</span><div class="tc-name">Hurricane Ride + Banana Boat (max 6 persons)</div></div></div>
-          <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/El_Nido_in_Palawan.jpg/800px-El_Nido_in_Palawan.jpg" alt="Scuba ATV" onerror="this.parentElement.style.background='#2d6a4f'"><div class="tc-overlay"><span class="tc-badge">COMBO 3 / PKG 1</span><div class="tc-name">Scuba Diving + ATV | or ATV/Buggy + Scuba + Zipline</div></div></div>
+          <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Hot_kawa_bath_in_Boracay.jpg/800px-Hot_kawa_bath_in_Boracay.jpg" alt="Combo 1A" onerror="this.parentElement.style.background='#2d6a4f'"><div class="tc-overlay"><span class="tc-badge">COMBO 1A</span><div class="tc-name">Helmet Diving + Solo Parasailing — best for first-timers</div></div></div>
+          <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Combo 1B" onerror="this.parentElement.style.background='#2d6a4f'"><div class="tc-overlay"><span class="tc-badge">COMBO 1B</span><div class="tc-name">Helmet Diving + Multi-Flyer Parasailing — couples &amp; families</div></div></div>
+          <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/White_Beach,_Boracay.jpg/800px-White_Beach,_Boracay.jpg" alt="Combo 2"><div class="tc-overlay"><span class="tc-badge">COMBO 2</span><div class="tc-name">Hurricane Ride + Banana Boat (max 6 persons)</div></div></div>
+          <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/El_Nido_in_Palawan.jpg/800px-El_Nido_in_Palawan.jpg" alt="Combo 3" onerror="this.parentElement.style.background='#2d6a4f'"><div class="tc-overlay"><span class="tc-badge">COMBO 3 / PKG 1</span><div class="tc-name">Scuba Diving + ATV | or ATV/Buggy + Scuba + Zipline</div></div></div>
         </div>
         <div class="tip-box"><span class="box-ico">💡</span> <b>Upsell Guide:</b> Combos 1A/1B are great for couples, Combo 2 for barkada groups. Package 1 (ATV+Scuba+Zipline) is the complete adventure package.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">9</div>
-        <div class="qa-question">May free hotel pick-up ba para sa Island Hopping?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">9</div><div class="qa-question">May free hotel pick-up ba para sa Island Hopping?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Hotel pick-up is included</span></li>
@@ -691,13 +593,8 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">10</div>
-        <div class="qa-question">Ano ang important reminders para sa guests?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">10</div><div class="qa-question">Ano ang important reminders para sa guests?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
           <li>Rates are subject to availability — <b>book early to secure promo rates!</b></li>
@@ -707,15 +604,9 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
     <div style="padding:10px 16px 4px;"><div class="section-label">➕ Additional FAQs</div></div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">11</div>
-        <div class="qa-question">Anong beach ang pinaka-maganda sa Boracay?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">11</div><div class="qa-question">Anong beach ang pinaka-maganda sa Boracay?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
           <li><b>White Beach (Station 1–3)</b> — the world-famous main beach; best for sunsets, nightlife, and dining</li>
@@ -726,44 +617,29 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> Most hotels are near White Beach — the main hub for shopping, dining, and entertainment. Great selling point!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">12</div>
-        <div class="qa-question">Anong best season para mag-Boracay?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">12</div><div class="qa-question">Anong best season para mag-Boracay?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th>Season</th><th>Months</th><th>Condition</th></tr>
-          <tr><td>🌤 Amihan (Peak)</td><td>November – May</td><td>Calm waters, clear skies — best for island hopping & beach</td></tr>
+          <tr><td>🌤 Amihan (Peak)</td><td>November – May</td><td>Calm waters, clear skies — best for island hopping &amp; beach</td></tr>
           <tr><td>🌧 Habagat</td><td>June – October</td><td>Rougher sea, rain likely; some boat routes change</td></tr>
         </table>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">13</div>
-        <div class="qa-question">Anong recommended itinerary para sa Boracay?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">13</div><div class="qa-question">Anong recommended itinerary para sa Boracay?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="itinerary">
-          <div class="itin-day"><div class="itin-bubble">1</div><div class="itin-content"><div class="itin-title">Arrival & Check-in</div><div class="itin-detail">Free time at White Beach, explore D'Mall, enjoy the sunset</div></div></div>
+          <div class="itin-day"><div class="itin-bubble">1</div><div class="itin-content"><div class="itin-title">Arrival &amp; Check-in</div><div class="itin-detail">Free time at White Beach, explore D'Mall, enjoy the sunset</div></div></div>
           <div class="itin-day"><div class="itin-bubble">2</div><div class="itin-content"><div class="itin-title">FREE Island Hopping + Kawa Hot Bath</div><div class="itin-detail">Full day tour — included in the package. Optional: add buffet lunch</div></div></div>
           <div class="itin-day"><div class="itin-bubble">3</div><div class="itin-content"><div class="itin-title">Optional Activities or Free Time</div><div class="itin-detail">Water sports combos, parasailing, ATV, or beach relaxation before departure</div></div></div>
         </div>
         <div class="tip-box"><span class="box-ico">💡</span> <b>Upsell:</b> Day 3 is perfect for suggesting water sports combos (Combos 1–3) or a standalone activity!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">14</div>
-        <div class="qa-question">Sino ang ideal na guest para sa Boracay package?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">14</div><div class="qa-question">Sino ang ideal na guest para sa Boracay package?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th>Guest Type</th><th>Best Activity / Package Add-on</th></tr>
@@ -775,7 +651,6 @@ p{margin:6px 0;font-size:12.5px;}
         </table>
       </div>
     </div>
-
     <div class="quick-summary">
       <div class="qs-title">⚡ Boracay Quick Reference</div>
       <div class="qs-grid">
@@ -795,13 +670,12 @@ p{margin:6px 0;font-size:12.5px;}
 ══════════════════════════════════════ -->
 <div class="dest-section c-batanes" id="batanes">
   <div class="dest-hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Racuh_a_Payaman,_Batanes.jpg/800px-Racuh_a_Payaman,_Batanes.jpg" alt="Batanes" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Naidi_Hills_Lighthouse_Batanes.jpg/800px-Naidi_Hills_Lighthouse_Batanes.jpg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Racuh_a_Payaman,_Batanes.jpg/800px-Racuh_a_Payaman,_Batanes.jpg" alt="Batanes">
     <div class="dest-hero-overlay">
       <h2>⛰️ Batanes</h2>
       <p class="tagline">Philippines' Northernmost Frontier · Ivatan Culture · Rolling Hills · Stone Houses</p>
     </div>
   </div>
-
   <div class="dest-content">
     <div class="photo-strip g4">
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Racuh_a_Payaman,_Batanes.jpg/800px-Racuh_a_Payaman,_Batanes.jpg" alt="Rolling Hills" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Marlboro Country</div></div>
@@ -809,45 +683,32 @@ p{margin:6px 0;font-size:12.5px;}
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Naidi_Hills_Lighthouse_Batanes.jpg/800px-Naidi_Hills_Lighthouse_Batanes.jpg" alt="Basco Lighthouse" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Basco Lighthouse</div></div>
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Kawasan_Falls_Cebu_Philippines.jpg/800px-Kawasan_Falls_Cebu_Philippines.jpg" alt="Sabtang" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Sabtang Island</div></div>
     </div>
-
-    <!-- Package overview -->
     <div style="padding:14px 16px 4px;">
       <div class="section-label">📦 Package Overview</div>
       <table class="faq-table">
         <tr><th>Package</th><th>Tour Included</th><th>Duration</th><th>Best For</th></tr>
-        <tr><td><b>Package 1</b></td><td>Free & Easy — No tours</td><td>3D2N</td><td>DIY / Photographers</td></tr>
+        <tr><td><b>Package 1</b></td><td>Free &amp; Easy — No tours</td><td>3D2N</td><td>DIY / Photographers</td></tr>
         <tr><td><b>Package 2</b></td><td>North Batan Tour</td><td>3D2N</td><td>First-timers</td></tr>
         <tr><td><b>Package 3</b></td><td>South Batan Tour</td><td>3D2N</td><td>Scenic lovers</td></tr>
         <tr><td><b>Package 4</b></td><td>Sabtang Island Tour</td><td>3D2N</td><td>Culture seekers</td></tr>
         <tr><td><b>Package 5</b></td><td>North + South + Sabtang</td><td>4D3N</td><td>Complete experience</td></tr>
       </table>
     </div>
-
-    <!-- Batanes Q1 -->
     <div class="qa-block open">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">1</div>
-        <div class="qa-question">Ano ang kasama sa Package 1 (Free & Easy)?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">1</div><div class="qa-question">Ano ang kasama sa Package 1 (Free &amp; Easy)?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Hotel Accommodation</span></li>
           <li><span class="ci">✅</span><span>Daily Breakfast</span></li>
           <li><span class="ci">✅</span><span>Roundtrip Airport Transfers <em>(except selected hotels)</em></span></li>
-          <li><span class="ci">❌</span><span>Tours — Package 1 is Free & Easy. Guests plan their own itinerary.</span></li>
+          <li><span class="ci">❌</span><span>Tours — Package 1 is Free &amp; Easy. Guests plan their own itinerary.</span></li>
           <li><span class="ci">❌</span><span>Airfare</span></li>
         </ul>
-        <div class="note-box"><span class="box-ico">⚠️</span> Exceptions on airport transfer: Bernardos Lantia Hotel & Residencia Du Basco — additional <b>₱1,400 RT transfer fee</b> applies.</div>
+        <div class="note-box"><span class="box-ico">⚠️</span> Exceptions on airport transfer: Bernardos Lantia Hotel &amp; Residencia Du Basco — additional <b>₱1,400 RT transfer fee</b> applies.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">2</div>
-        <div class="qa-question">May tour na ba itong package? Ano ang optional tours?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">2</div><div class="qa-question">May tour na ba itong package? Ano ang optional tours?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p>Package 1 has no included tours. Guests choose from:</p>
         <div class="tour-cards">
@@ -858,42 +719,27 @@ p{margin:6px 0;font-size:12.5px;}
         </div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">3</div>
-        <div class="qa-question">Ano ang kasama sa Package 2 (North Batan Tour)?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">3</div><div class="qa-question">Ano ang kasama sa Package 2 (North Batan Tour)?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Hotel, Breakfast, Airport Transfers</span></li>
           <li><span class="ci">✅</span><span>North Batan Tour — Lunch included</span></li>
-          <li><span class="ci">✅</span><span>Tour Guide & Transportation</span></li>
+          <li><span class="ci">✅</span><span>Tour Guide &amp; Transportation</span></li>
           <li><span class="ci">✅</span><span>Environmental / PAMB / Registration Fees</span></li>
         </ul>
         <p><b>Destinations:</b> Mt. Carmel Chapel, Radar Station, Idjang Viewing, Japanese Tunnel, Valugan Boulder Beach, Casa Real, Sto. Domingo Church, Vayang Rolling Hills, Basco Lighthouse</p>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">4</div>
-        <div class="qa-question">Kasama ba ang airfare?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">4</div><div class="qa-question">Kasama ba ang airfare?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list"><li><span class="ci">❌</span><span>Airfare is <b>NOT</b> included in any Batanes package. Land arrangement only.</span></li></ul>
         <div class="tip-box"><span class="box-ico">💡</span> Batanes flights can be limited — advise guests to book flights very early, especially during peak season!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">5</div>
-        <div class="qa-question">Included ba ang airport transfer sa lahat ng hotel?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">5</div><div class="qa-question">Included ba ang airport transfer sa lahat ng hotel?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Airport transfer included for most hotels</span></li>
@@ -902,13 +748,8 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">6</div>
-        <div class="qa-question">May breakfast ba sa lahat ng packages?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">6</div><div class="qa-question">May breakfast ba sa lahat ng packages?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Yes — Daily hotel breakfast is included in all Batanes packages (Packages 1–5)</span></li>
@@ -916,13 +757,8 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">7</div>
-        <div class="qa-question">Pwede ba mag-add ng tour habang nasa Batanes na?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">7</div><div class="qa-question">Pwede ba mag-add ng tour habang nasa Batanes na?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p>Subject to availability, but <b>strongly recommended to book before travel</b> for these reasons:</p>
         <ul class="bullet-list">
@@ -933,13 +769,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> Always pre-book tours for Batanes. This is a remote island — walk-in bookings are unreliable!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">8</div>
-        <div class="qa-question">May Sneak-in Child rate ba?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">8</div><div class="qa-question">May Sneak-in Child rate ba?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
           <li>Ages <b>2–4 years old</b>: <span class="price">₱1,200</span></li>
@@ -948,25 +779,15 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">9</div>
-        <div class="qa-question">Pwede bang piliin ang hotel?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">9</div><div class="qa-question">Pwede bang piliin ang hotel?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p>Yes, subject to room availability. Options range from budget guesthouses to mid-range hotels.</p>
         <div class="note-box"><span class="box-ico">⚠️</span> Hotel options in Batanes are limited — book early, especially during peak months (March–May).</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">10</div>
-        <div class="qa-question">Sino ang pinaka-ideal na guest para sa Package 1?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">10</div><div class="qa-question">Sino ang pinaka-ideal na guest para sa Package 1?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
           <li>📸 Photographers and content creators who want to explore freely</li>
@@ -977,33 +798,22 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> For first-time Batanes visitors, upsell to Package 5 — it covers all 3 major tours in one booking!</div>
       </div>
     </div>
-
     <div style="padding:10px 16px 4px;"><div class="section-label">➕ Additional FAQs</div></div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">11</div>
-        <div class="qa-question">Ano ang pinaka-recommended na package para sa first-timers?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">11</div><div class="qa-question">Ano ang pinaka-recommended na package para sa first-timers?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p><b>Package 5 (4D3N Complete Batanes)</b> is the best value for first-timers:</p>
         <ul class="check-list">
           <li><span class="ci">✅</span><span>North Batan Tour</span></li>
           <li><span class="ci">✅</span><span>South Batan Tour</span></li>
           <li><span class="ci">✅</span><span>Sabtang Island Tour + Faluwa Boat</span></li>
-          <li><span class="ci">✅</span><span>All Lunches, Fees, Tour Guide & Transportation</span></li>
+          <li><span class="ci">✅</span><span>All Lunches, Fees, Tour Guide &amp; Transportation</span></li>
         </ul>
         <div class="tip-box"><span class="box-ico">💡</span> <b>Biggest upsell in Batanes.</b> Package 5 covers almost all major attractions — guests leave Batanes feeling they got the full experience.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">12</div>
-        <div class="qa-question">Ano ang pinaka-iconic na attractions sa Batanes?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">12</div><div class="qa-question">Ano ang pinaka-iconic na attractions sa Batanes?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th>Attraction</th><th>Found In</th><th>Why It's Special</th></tr>
@@ -1015,13 +825,8 @@ p{margin:6px 0;font-size:12.5px;}
         </table>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">13</div>
-        <div class="qa-question">Anong best season para mag-Batanes?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">13</div><div class="qa-question">Anong best season para mag-Batanes?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th>Season</th><th>Months</th><th>Notes</th></tr>
@@ -1032,30 +837,20 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="warn-box"><span class="box-ico">⚠️</span> <b>Very important to tell guests:</b> Batanes is frequently hit by typhoons. Travel insurance is strongly recommended. Flights can be delayed or cancelled.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">14</div>
-        <div class="qa-question">Kasama ba ang lahat ng entrance fees sa tour packages?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">14</div><div class="qa-question">Kasama ba ang lahat ng entrance fees sa tour packages?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>PAMB Fees — included in Packages 2–5</span></li>
           <li><span class="ci">✅</span><span>Registration Fees — included</span></li>
           <li><span class="ci">✅</span><span>Environmental Fees — included</span></li>
           <li><span class="ci">✅</span><span>Tour Fees — included</span></li>
-          <li><span class="ci">✅</span><span>Faluwa Boat Roundtrip — included in Packages 4 & 5</span></li>
+          <li><span class="ci">✅</span><span>Faluwa Boat Roundtrip — included in Packages 4 &amp; 5</span></li>
         </ul>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">15</div>
-        <div class="qa-question">Pwede bang mag-add ng Itbayat Island Overnight Tour?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">15</div><div class="qa-question">Pwede bang mag-add ng Itbayat Island Overnight Tour?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p>Yes! Itbayat Island Overnight Tour is available as an add-on (2 Days / 1 Night):</p>
         <ul class="check-list">
@@ -1066,16 +861,15 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="note-box"><span class="box-ico">⚠️</span> Requires separate booking and additional night stay. Available subject to boat schedule and weather conditions.</div>
       </div>
     </div>
-
     <div class="quick-summary">
       <div class="qs-title">⚡ Batanes Quick Reference</div>
       <div class="qs-grid">
         <div class="qs-item"><span class="qs-icon">✈️</span><div><span class="qs-label">Airport</span><span class="qs-val">Basco Airport (BSO)</span></div></div>
         <div class="qs-item"><span class="qs-icon">⭐</span><div><span class="qs-label">Best Package</span><span class="qs-val">Package 5 — Complete Batanes (4D3N)</span></div></div>
-        <div class="qs-item"><span class="qs-icon">⛵</span><div><span class="qs-label">Sabtang Boat</span><span class="qs-val">Faluwa included in Packages 4 & 5</span></div></div>
+        <div class="qs-item"><span class="qs-icon">⛵</span><div><span class="qs-label">Sabtang Boat</span><span class="qs-val">Faluwa included in Packages 4 &amp; 5</span></div></div>
         <div class="qs-item"><span class="qs-icon">📸</span><div><span class="qs-label">Must-See</span><span class="qs-val">Marlboro Country · Chavayan · Basco Lighthouse</span></div></div>
         <div class="qs-item"><span class="qs-icon">🌤</span><div><span class="qs-label">Best Season</span><span class="qs-val">March – June (Peak Season)</span></div></div>
-        <div class="qs-item"><span class="qs-icon">⚠️</span><div><span class="qs-label">Key Reminder</span><span class="qs-val">Book early! Flights & hotels are limited</span></div></div>
+        <div class="qs-item"><span class="qs-icon">⚠️</span><div><span class="qs-label">Key Reminder</span><span class="qs-val">Book early! Flights &amp; hotels are limited</span></div></div>
       </div>
     </div>
   </div>
@@ -1086,13 +880,12 @@ p{margin:6px 0;font-size:12.5px;}
 ══════════════════════════════════════ -->
 <div class="dest-section c-bohol" id="bohol">
   <div class="dest-hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Chocolate_Hills_overview.JPG/800px-Chocolate_Hills_overview.JPG" alt="Bohol" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Naidi_Hills_Lighthouse_Batanes.jpg/800px-Naidi_Hills_Lighthouse_Batanes.jpg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Chocolate_Hills_overview.JPG/800px-Chocolate_Hills_overview.JPG" alt="Bohol">
     <div class="dest-hero-overlay">
       <h2>🦔 Bohol</h2>
       <p class="tagline">Chocolate Hills · Tarsier Sanctuary · Balicasag Island · Loboc River</p>
     </div>
   </div>
-
   <div class="dest-content">
     <div class="photo-strip g4">
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Chocolate_Hills_overview.JPG/800px-Chocolate_Hills_overview.JPG" alt="Chocolate Hills" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Chocolate Hills</div></div>
@@ -1100,13 +893,8 @@ p{margin:6px 0;font-size:12.5px;}
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Tarsier" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Philippine Tarsier Sanctuary</div></div>
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Kawasan_Falls_Cebu_Philippines.jpg/800px-Kawasan_Falls_Cebu_Philippines.jpg" alt="Loboc River" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Loboc River Cruise</div></div>
     </div>
-
     <div class="qa-block open">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">1</div>
-        <div class="qa-question">Ano ang kasama at hindi kasama sa package?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">1</div><div class="qa-question">Ano ang kasama at hindi kasama sa package?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Hotel Accommodation</span></li>
@@ -1114,37 +902,27 @@ p{margin:6px 0;font-size:12.5px;}
           <li><span class="ci">✅</span><span>Roundtrip Airport Transfers</span></li>
           <li><span class="ci">✅</span><span><b>Package 2 only:</b> Complimentary Bohol Countryside Tour (private vehicle, driver/guide, entrance fees, gasoline)</span></li>
           <li><span class="ci">❌</span><span>Airfare</span></li>
-          <li><span class="ci">❌</span><span>Lunch & Dinner</span></li>
-          <li><span class="ci">❌</span><span>Optional Tours (Package 1 is Free & Easy)</span></li>
+          <li><span class="ci">❌</span><span>Lunch &amp; Dinner</span></li>
+          <li><span class="ci">❌</span><span>Optional Tours (Package 1 is Free &amp; Easy)</span></li>
           <li><span class="ci">❌</span><span>Hotel Security Deposit</span></li>
         </ul>
         <div class="tip-box"><span class="box-ico">💡</span> <b>Package 2</b> already includes the Countryside Tour — always lead with Package 2 for first-time visitors to Bohol!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">2</div>
-        <div class="qa-question">Ano ang pinakamagandang optional tour para sa first-time visitor?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">2</div><div class="qa-question">Ano ang pinakamagandang optional tour para sa first-time visitor?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p><b>Bohol Countryside Tour</b> is the #1 recommendation:</p>
         <div class="tour-cards">
-          <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Chocolate_Hills_overview.JPG/800px-Chocolate_Hills_overview.JPG" alt="Choco Hills" onerror="this.parentElement.style.background='#1b4332'"><div class="tc-overlay"><span class="tc-badge">⭐ #1 PRIORITY</span><div class="tc-name">Countryside Tour — Chocolate Hills · Tarsier · Man-made Forest · Blood Compact · Baclayon Church</div></div></div>
+          <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Chocolate_Hills_overview.JPG/800px-Chocolate_Hills_overview.JPG" alt="Countryside" onerror="this.parentElement.style.background='#1b4332'"><div class="tc-overlay"><span class="tc-badge">⭐ #1 PRIORITY</span><div class="tc-name">Countryside Tour — Chocolate Hills · Tarsier · Man-made Forest · Blood Compact · Baclayon Church</div></div></div>
           <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Balicasag_Island,_Bohol.jpg/800px-Balicasag_Island,_Bohol.jpg" alt="Island Hopping" onerror="this.parentElement.style.background='#1b4332'"><div class="tc-overlay"><span class="tc-badge">#2 UPSELL</span><div class="tc-name">Island Hopping — Dolphin Watching · Balicasag Island · Virgin Island Sandbar</div></div></div>
           <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Kawasan_Falls_Cebu_Philippines.jpg/800px-Kawasan_Falls_Cebu_Philippines.jpg" alt="Panglao" onerror="this.parentElement.style.background='#1b4332'"><div class="tc-overlay"><span class="tc-badge">COUPLES</span><div class="tc-name">Panglao Tour — Bohol Bee Farm · Hinagdanan Cave · Dauis Church · Shell Museum · Moadto Strip</div></div></div>
           <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Whale Shark" onerror="this.parentElement.style.background='#1b4332'"><div class="tc-overlay"><span class="tc-badge">ADVENTURE</span><div class="tc-name">Whale Shark Interaction — Lila, Bohol</div></div></div>
         </div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">3</div>
-        <div class="qa-question">Ano ang difference ng Private at Joiner Countryside Tour?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">3</div><div class="qa-question">Ano ang difference ng Private at Joiner Countryside Tour?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th></th><th>Private Countryside Tour</th><th>Joiner Countryside Tour</th></tr>
@@ -1156,30 +934,19 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> Recommend Private Tour for families of 4 or more — more comfort, flexibility, and worth the extra cost.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">4</div>
-        <div class="qa-question">Ano ang Island Hopping Tour?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">4</div><div class="qa-question">Ano ang Island Hopping Tour?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p><b>Destinations:</b> Dolphin Watching → Balicasag Island → Virgin Island Sandbar</p>
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Boat, Environmental Fee, Life Jacket, Tour Guide</span></li>
           <li><span class="ci">❌</span><span>Snorkeling Fee + Mask Rental (own expense)</span></li>
         </ul>
-        <p><b>Joiner Island Hopping also includes:</b> Snorkeling Gear + Turtle Watching + Fish Sanctuary</p>
         <div class="tip-box"><span class="box-ico">💡</span> Joiner tours are great for budget travelers. Private tours (departure ~6:30 AM) are best for couples and families wanting a more exclusive experience.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">5</div>
-        <div class="qa-question">Ano ang Whale Shark Interaction Tour?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">5</div><div class="qa-question">Ano ang Whale Shark Interaction Tour?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p><b>Location:</b> Lila, Bohol</p>
         <ul class="check-list">
@@ -1189,38 +956,23 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> Great for adventure seekers! Also good for guests who have already been to Oslob, Cebu and want a similar experience in Bohol.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">6</div>
-        <div class="qa-question">Ano ang Anda & Candijay Tour?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">6</div><div class="qa-question">Ano ang Anda &amp; Candijay Tour?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p><b>Destinations:</b> Can-Umantad Falls, Cadapdapan Rice Terraces, Anda Beach, Cabagnaw Cave</p>
         <p><b>Optional:</b> Habal-Habal Ride</p>
         <div class="tip-box"><span class="box-ico">💡</span> Best for nature lovers, adventure travelers, and guests staying <b>4D3N or longer</b>. Also excellent for repeat Bohol visitors wanting something different.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">7</div>
-        <div class="qa-question">Ano ang Panglao Tour?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">7</div><div class="qa-question">Ano ang Panglao Tour?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p><b>Destinations:</b> Bohol Bee Farm, Hinagdanan Cave, Dauis Church, Panglao Church, Shell Museum, Moadto Strip</p>
         <p><b>Best For:</b> Couples, Honeymooners, guests who prefer a relaxing sightseeing day</p>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">8</div>
-        <div class="qa-question">May additional charges ba na dapat sabihin sa guest?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">8</div><div class="qa-question">May additional charges ba na dapat sabihin sa guest?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
           <li>Loboc River Cruise — <span class="price">₱1,200/person</span></li>
@@ -1234,13 +986,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="warn-box"><span class="box-ico">💵</span> Always remind guests to bring extra cash for optional activities and incidental expenses!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">9</div>
-        <div class="qa-question">Anong tour ang dapat i-recommend depende sa guest?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">9</div><div class="qa-question">Anong tour ang dapat i-recommend depende sa guest?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th>Guest Type</th><th>Recommended Tours</th></tr>
@@ -1249,18 +996,13 @@ p{margin:6px 0;font-size:12.5px;}
           <tr><td>🎒 Barkada</td><td>Island Hopping + ATV + Whale Shark</td></tr>
           <tr><td>📸 First-Timer</td><td>Countryside Tour ⭐ Highest Priority</td></tr>
           <tr><td>🌊 Beach Lover</td><td>Island Hopping</td></tr>
-          <tr><td>🥾 Adventure Lover</td><td>Whale Shark + Anda & Candijay + ATV</td></tr>
+          <tr><td>🥾 Adventure Lover</td><td>Whale Shark + Anda &amp; Candijay + ATV</td></tr>
           <tr><td>👵 Senior Travelers</td><td>Countryside Tour + Panglao Tour</td></tr>
         </table>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">10</div>
-        <div class="qa-question">Ano ang hotel check-in at check-out policy?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">10</div><div class="qa-question">Ano ang hotel check-in at check-out policy?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
           <li>Check-in: <b>2:00 PM – 3:00 PM</b></li>
@@ -1270,63 +1012,42 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
     <div style="padding:10px 16px 4px;"><div class="section-label">➕ Additional FAQs</div></div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">11</div>
-        <div class="qa-question">Ano ang recommended 3D2N itinerary para sa Bohol?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">11</div><div class="qa-question">Ano ang recommended 3D2N itinerary para sa Bohol?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="itinerary">
-          <div class="itin-day"><div class="itin-bubble">1</div><div class="itin-content"><div class="itin-title">Arrival & Free Time</div><div class="itin-detail">Hotel check-in, explore Panglao beach, dinner at leisure</div></div></div>
+          <div class="itin-day"><div class="itin-bubble">1</div><div class="itin-content"><div class="itin-title">Arrival &amp; Free Time</div><div class="itin-detail">Hotel check-in, explore Panglao beach, dinner at leisure</div></div></div>
           <div class="itin-day"><div class="itin-bubble">2</div><div class="itin-content"><div class="itin-title">Bohol Countryside Tour</div><div class="itin-detail">Chocolate Hills · Tarsier Sanctuary · Man-made Forest · Baclayon Church · Optional Loboc River Cruise</div></div></div>
           <div class="itin-day"><div class="itin-bubble">3</div><div class="itin-content"><div class="itin-title">Island Hopping or Departure</div><div class="itin-detail">Morning Island Hopping for afternoon/evening flights, OR free time before airport transfer</div></div></div>
         </div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">12</div>
-        <div class="qa-question">Ano ang upsell sequence na dapat sundin ng agents?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">12</div><div class="qa-question">Ano ang upsell sequence na dapat sundin ng agents?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="itinerary">
           <div class="itin-day"><div class="itin-bubble">1</div><div class="itin-content"><div class="itin-title">Countryside Tour</div><div class="itin-detail">Highest priority — always offer first. Package 2 already includes this!</div></div></div>
           <div class="itin-day"><div class="itin-bubble">2</div><div class="itin-content"><div class="itin-title">Island Hopping</div><div class="itin-detail">Second upsell — add Loboc River Cruise as further add-on</div></div></div>
           <div class="itin-day"><div class="itin-bubble">3</div><div class="itin-content"><div class="itin-title">Panglao Tour</div><div class="itin-detail">Great for couples and relaxation seekers</div></div></div>
-          <div class="itin-day"><div class="itin-bubble">4</div><div class="itin-content"><div class="itin-title">Whale Shark / Anda & Candijay</div><div class="itin-detail">For adventure guests or repeat visitors</div></div></div>
+          <div class="itin-day"><div class="itin-bubble">4</div><div class="itin-content"><div class="itin-title">Whale Shark / Anda &amp; Candijay</div><div class="itin-detail">For adventure guests or repeat visitors</div></div></div>
         </div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">13</div>
-        <div class="qa-question">Qualifying questions bago mag-recommend ng tour?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">13</div><div class="qa-question">Qualifying questions bago mag-recommend ng tour?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
           <li>✅ <b>Is this your first time in Bohol?</b> → Yes = Countryside Tour</li>
           <li>✅ <b>Do you prefer beaches or sightseeing?</b> → Beach = Island Hopping | Sightseeing = Countryside</li>
           <li>✅ <b>Traveling with kids or seniors?</b> → Private Countryside Tour</li>
           <li>✅ <b>Celebrating a honeymoon?</b> → Private Island Hopping + Panglao Tour</li>
-          <li>✅ <b>Have you been to Bohol before?</b> → Anda & Candijay or Whale Shark</li>
+          <li>✅ <b>Have you been to Bohol before?</b> → Anda &amp; Candijay or Whale Shark</li>
         </ul>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">14</div>
-        <div class="qa-question">Anong airport ang dapat gamitin para sa Bohol?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">14</div><div class="qa-question">Anong airport ang dapat gamitin para sa Bohol?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="info-box"><span class="box-ico">✈️</span> Book flights to <b>Tagbilaran Airport (TAG)</b>, the main gateway to Bohol. Alternatively, fly to Cebu (CEB) and take the fast ferry to Tagbilaran (~2 hours).</div>
         <ul class="bullet-list">
@@ -1335,9 +1056,8 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
     <div class="quick-summary">
-      <div class="qs-title">⚡ Bohol Quick Reference & Upsell Priority</div>
+      <div class="qs-title">⚡ Bohol Quick Reference &amp; Upsell Priority</div>
       <div class="qs-grid">
         <div class="qs-item"><span class="qs-icon">✈️</span><div><span class="qs-label">Airport</span><span class="qs-val">Tagbilaran (TAG)</span></div></div>
         <div class="qs-item"><span class="qs-icon">1️⃣</span><div><span class="qs-label">Top Upsell</span><span class="qs-val">Countryside Tour (incl. in Pkg 2!)</span></div></div>
@@ -1355,13 +1075,12 @@ p{margin:6px 0;font-size:12.5px;}
 ══════════════════════════════════════ -->
 <div class="dest-section c-cebu" id="cebu">
   <div class="dest-hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Cebu" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Naidi_Hills_Lighthouse_Batanes.jpg/800px-Naidi_Hills_Lighthouse_Batanes.jpg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Cebu">
     <div class="dest-hero-overlay">
       <h2>🏙️ Cebu</h2>
       <p class="tagline">History · Whale Sharks · Kawasan Canyoneering · Sardines Run</p>
     </div>
   </div>
-
   <div class="dest-content">
     <div class="photo-strip g4">
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Whale Shark" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Oslob Whale Shark</div></div>
@@ -1369,39 +1088,25 @@ p{margin:6px 0;font-size:12.5px;}
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Cebu City" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Cebu City Heritage</div></div>
       <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/El_Nido_in_Palawan.jpg/800px-El_Nido_in_Palawan.jpg" alt="Simala" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Simala Shrine</div></div>
     </div>
-
     <div class="qa-block open">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">1</div>
-        <div class="qa-question">Ano ang kasama at hindi kasama sa package?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">1</div><div class="qa-question">Ano ang kasama at hindi kasama sa package?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="check-list">
           <li><span class="ci">✅</span><span>Hotel Accommodation</span></li>
           <li><span class="ci">✅</span><span>Daily Breakfast <em>(except hotels with no breakfast)</em></span></li>
           <li><span class="ci">✅</span><span>Roundtrip Airport Transfers</span></li>
-          <li><span class="ci">✅</span><span><b>Complimentary Cebu City & Uphill Tour</b> — Entrance Fees, Fuel & Parking included</span></li>
+          <li><span class="ci">✅</span><span><b>Complimentary Cebu City &amp; Uphill Tour</b> — Entrance Fees, Fuel &amp; Parking included</span></li>
           <li><span class="ci">❌</span><span>Roundtrip Airfare</span></li>
-          <li><span class="ci">❌</span><span>Lunch & Dinner</span></li>
-          <li><span class="ci">❌</span><span>Optional Tours & Environmental Fees</span></li>
-          <li><span class="ci">❌</span><span>Hotel Security Deposit & Personal Expenses</span></li>
+          <li><span class="ci">❌</span><span>Lunch &amp; Dinner</span></li>
+          <li><span class="ci">❌</span><span>Optional Tours &amp; Environmental Fees</span></li>
+          <li><span class="ci">❌</span><span>Hotel Security Deposit &amp; Personal Expenses</span></li>
         </ul>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">2</div>
-        <div class="qa-question">Ano ang itinerary ng Complimentary Cebu City & Uphill Tour?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">2</div><div class="qa-question">Ano ang itinerary ng Complimentary Cebu City &amp; Uphill Tour?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="info-box"><span class="box-ico">🕐</span> <b>Whole-day tour (approx. 8–10 hours).</b> Pick-up: Airport 8:30 AM | SM Traveller's Lounge 9:00 AM | Allsons 9:30 AM | EON Hotel 10:00 AM</div>
-        <div class="photo-strip g2" style="margin:10px 0;">
-          <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Temple of Leah" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Temple of Leah</div></div>
-          <div class="photo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/El_Nido_in_Palawan.jpg/800px-El_Nido_in_Palawan.jpg" alt="Sirao Flower Garden" onerror="this.parentElement.style.display='none'"><div class="photo-cap">Sirao Flower Garden</div></div>
-        </div>
         <ul class="bullet-list">
           <li>Temple of Leah · Sirao Flower Garden · Taoist Temple</li>
           <li>Cebu Heritage Monument · Sto. Niño Church · Magellan's Cross</li>
@@ -1411,13 +1116,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="note-box"><span class="box-ico">⚠️</span> No fixed itinerary — route may change due to traffic and weather. <b>Always inform guests of this.</b></div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">3</div>
-        <div class="qa-question">Anong optional tours ang pwedeng i-avail?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">3</div><div class="qa-question">Anong optional tours ang pwedeng i-avail?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="tour-cards">
           <div class="tour-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Oslob_Whale_Shark_Interaction.jpg/800px-Oslob_Whale_Shark_Interaction.jpg" alt="Oslob" onerror="this.parentElement.style.background='#6a0dad'"><div class="tc-overlay"><span class="tc-badge">⭐ MOST POPULAR</span><div class="tc-name">Oslob Whale Shark + Sumilon Island + Simala Church + Carcar Pasalubong</div></div></div>
@@ -1427,13 +1127,8 @@ p{margin:6px 0;font-size:12.5px;}
         </div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">4</div>
-        <div class="qa-question">Ano ang difference ng Moalboal Tour at Moalboal with Kawasan Canyoneering?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">4</div><div class="qa-question">Ano ang difference ng Moalboal Tour at Moalboal with Kawasan Canyoneering?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th></th><th>Moalboal Tour</th><th>Moalboal + Canyoneering</th></tr>
@@ -1449,15 +1144,10 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="note-box"><span class="box-ico">⚠️</span> Environmental Fee NOT included in canyoneering package. Mactan hotel pick-up: +<span class="price">₱400/way</span>.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">5</div>
-        <div class="qa-question">Ano ang Cebu Round South Tour?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">5</div><div class="qa-question">Ano ang Cebu Round South Tour?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
-        <p>The ultimate full-day South Cebu adventure combining the best of the south:</p>
+        <p>The ultimate full-day South Cebu adventure:</p>
         <ul class="bullet-list">
           <li>🐋 Whale Shark Encounter (Oslob)</li>
           <li>🏊 Kawasan Falls + optional Canyoneering</li>
@@ -1468,13 +1158,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> Best for guests who have a full free day and want maximum value — this packs the most South Cebu highlights in one trip!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">6</div>
-        <div class="qa-question">Ano ang Simala with Uphill Tour?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">6</div><div class="qa-question">Ano ang Simala with Uphill Tour?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p>A relaxing pilgrimage and scenic sightseeing tour:</p>
         <ul class="bullet-list">
@@ -1485,29 +1170,19 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> Ideal for families, couples, and seniors — a peaceful, photo-friendly day that's not physically demanding.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">7</div>
-        <div class="qa-question">Ano ang Cebu Safari Adventure Park Tour?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">7</div><div class="qa-question">Ano ang Cebu Safari Adventure Park Tour?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
-          <li>Cebu Safari & Adventure Park — interactive animal encounters</li>
+          <li>Cebu Safari &amp; Adventure Park — interactive animal encounters</li>
           <li>Optional visit: Our Lady of Manaoag Church</li>
           <li>Titay's Pasalubong stop</li>
         </ul>
         <p><b>Best For:</b> Families with kids, animal lovers</p>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">8</div>
-        <div class="qa-question">May sidetrip ba papuntang Bohol mula sa Cebu?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">8</div><div class="qa-question">May sidetrip ba papuntang Bohol mula sa Cebu?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <p>Yes! Bohol Private Day Tour is available:</p>
         <ul class="check-list">
@@ -1518,13 +1193,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="tip-box"><span class="box-ico">💡</span> Great upsell for guests staying 4D3N or longer! Two destinations for the price of one trip.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">9</div>
-        <div class="qa-question">Ano ang mga importanteng reminders para sa guest?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">9</div><div class="qa-question">Ano ang mga importanteng reminders para sa guest?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
           <li>Hotel Check-in: <b>2:00–3:00 PM</b> | Check-out: <b>12:00 NN</b></li>
@@ -1538,13 +1208,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="warn-box"><span class="box-ico">📋</span> <b>ALWAYS SAY:</b> Itinerary is subject to change depending on weather or other circumstances!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">10</div>
-        <div class="qa-question">Paano i-recommend ang tamang optional tour sa client?</div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">10</div><div class="qa-question">Paano i-recommend ang tamang optional tour sa client?</div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th>Guest Type</th><th>Best Tour</th></tr>
@@ -1559,43 +1224,27 @@ p{margin:6px 0;font-size:12.5px;}
         </table>
       </div>
     </div>
-
     <div style="padding:10px 16px 4px;"><div class="section-label">➕ Additional FAQs</div></div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">11</div>
-        <div class="qa-question">Anong recommended itinerary para sa Cebu 3D2N?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">11</div><div class="qa-question">Anong recommended itinerary para sa Cebu 3D2N?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="itinerary">
-          <div class="itin-day"><div class="itin-bubble">1</div><div class="itin-content"><div class="itin-title">Arrival & Complimentary Cebu City Tour</div><div class="itin-detail">Pick-up from airport · Temple of Leah · Sirao · Sto. Niño · Magellan's Cross · Hotel check-in</div></div></div>
+          <div class="itin-day"><div class="itin-bubble">1</div><div class="itin-content"><div class="itin-title">Arrival &amp; Complimentary Cebu City Tour</div><div class="itin-detail">Pick-up from airport · Temple of Leah · Sirao · Sto. Niño · Magellan's Cross · Hotel check-in</div></div></div>
           <div class="itin-day"><div class="itin-bubble">2</div><div class="itin-content"><div class="itin-title">Optional Tour Day</div><div class="itin-detail">Choose: Oslob Whale Shark OR Moalboal OR Simala Uphill (pick-up 4:00 AM for South tours)</div></div></div>
-          <div class="itin-day"><div class="itin-bubble">3</div><div class="itin-content"><div class="itin-title">Free Time & Departure</div><div class="itin-detail">Pasalubong shopping, Mango Square / Ayala, airport transfer</div></div></div>
+          <div class="itin-day"><div class="itin-bubble">3</div><div class="itin-content"><div class="itin-title">Free Time &amp; Departure</div><div class="itin-detail">Pasalubong shopping, Mango Square / Ayala, airport transfer</div></div></div>
         </div>
         <div class="tip-box"><span class="box-ico">💡</span> Suggest extending to <b>4D3N or 5D4N</b> so guests can do both South Cebu + Bohol Day Tour without rushing. Great upsell!</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">12</div>
-        <div class="qa-question">Anong airport ang dapat gamitin para sa Cebu?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">12</div><div class="qa-question">Anong airport ang dapat gamitin para sa Cebu?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <div class="info-box"><span class="box-ico">✈️</span> Book flights to <b>Mactan-Cebu International Airport (CEB)</b> — the main gateway to Cebu.</div>
         <div class="note-box"><span class="box-ico">⚠️</span> Guests staying at Mactan hotels should note that South Cebu tour pick-up carries an additional <b>₱400/way</b> charge.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">13</div>
-        <div class="qa-question">Anong best season para mag-Cebu?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">13</div><div class="qa-question">Anong best season para mag-Cebu?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <table class="faq-table">
           <tr><th>Season</th><th>Months</th><th>Notes</th></tr>
@@ -1605,13 +1254,8 @@ p{margin:6px 0;font-size:12.5px;}
         <div class="note-box"><span class="box-ico">⚠️</span> Whale shark watching in Oslob runs year-round, but canyoneering at Kawasan may be suspended during heavy rains — inform guests.</div>
       </div>
     </div>
-
     <div class="qa-block">
-      <div class="qa-header" onclick="tog(this)">
-        <div class="qa-num">14</div>
-        <div class="qa-question">Qualifying questions bago mag-recommend ng tour sa Cebu?<span class="qa-badge">NEW</span></div>
-        <div class="qa-toggle">▼</div>
-      </div>
+      <div class="qa-header" onclick="tog(this)"><div class="qa-num">14</div><div class="qa-question">Qualifying questions bago mag-recommend ng tour sa Cebu?<span class="qa-badge">NEW</span></div><div class="qa-toggle">▼</div></div>
       <div class="qa-body">
         <ul class="bullet-list">
           <li>✅ <b>First time sa Cebu?</b> → City Tour (included!) + suggest one South Cebu add-on</li>
@@ -1623,14 +1267,13 @@ p{margin:6px 0;font-size:12.5px;}
         </ul>
       </div>
     </div>
-
     <div class="quick-summary">
       <div class="qs-title">⚡ Cebu Quick Reference</div>
       <div class="qs-grid">
         <div class="qs-item"><span class="qs-icon">✈️</span><div><span class="qs-label">Airport</span><span class="qs-val">Mactan-Cebu (CEB)</span></div></div>
-        <div class="qs-item"><span class="qs-icon">🎁</span><div><span class="qs-label">Free Inclusion</span><span class="qs-val">Cebu City & Uphill Tour</span></div></div>
+        <div class="qs-item"><span class="qs-icon">🎁</span><div><span class="qs-label">Free Inclusion</span><span class="qs-val">Cebu City &amp; Uphill Tour</span></div></div>
         <div class="qs-item"><span class="qs-icon">🐋</span><div><span class="qs-label">Top Upsell</span><span class="qs-val">Oslob Whale Shark or Round South Tour</span></div></div>
-        <div class="qs-item"><span class="qs-icon">⏰</span><div><span class="qs-label">Early Start!</span><span class="qs-val">Oslob & Moalboal — 4:00 AM pick-up</span></div></div>
+        <div class="qs-item"><span class="qs-icon">⏰</span><div><span class="qs-label">Early Start!</span><span class="qs-val">Oslob &amp; Moalboal — 4:00 AM pick-up</span></div></div>
         <div class="qs-item"><span class="qs-icon">🌤</span><div><span class="qs-label">Best Season</span><span class="qs-val">November – May</span></div></div>
         <div class="qs-item"><span class="qs-icon">📅</span><div><span class="qs-label">Check-in / Out</span><span class="qs-val">2:00–3:00 PM / 12:00 NN</span></div></div>
       </div>
@@ -1668,5 +1311,216 @@ window.addEventListener('scroll', () => {
   if(navLinks[current]) navLinks[current].classList.add('active');
 }, {passive:true});
 </script>
+
+<script id="admin-script">
+/* ---- Lightweight admin editor (text + images). Activate with ?admin in the URL. ---- */
+(function(){
+  var params = new URLSearchParams(location.search);
+  if(!params.has('admin')) return;
+
+  /* Text regions safe to edit */
+  var EDITABLE = [
+    '.dest-hero h2','.dest-hero .tagline',
+    '.mc-title','.mc-sub','.mc-pill','.mc-conf',
+    '.photo-cap',
+    '.tc-name','.tc-badge',
+    '.qa-question','.qa-body','.qa-badge',
+    '.qs-val','.qs-label',
+    '.itin-title','.itin-detail',
+    '.tip-box','.note-box','.info-box','.warn-box',
+    '.section-label',
+    '.toc-name','.toc-count',
+    'p','td','th','.price'
+  ].join(',');
+
+  /* Image containers */
+  var IMG_BOXES = ['.dest-hero','.photo-item','.tour-card','.master-cover'].join(',');
+
+  var pwd=null, editing=false;
+
+  /* ── Admin bar ── */
+  var bar=document.createElement('div');
+  bar.id='adminBar';
+  bar.innerHTML=''
+    +'<strong>Admin</strong>'
+    +'<span class="status" id="aStatus">Locked</span>'
+    +'<span class="sp"></span>'
+    +'<input id="aPwd" type="password" placeholder="Admin password" style="width:160px" autocomplete="off">'
+    +'<button class="b-edit" id="aEdit">Edit content</button>'
+    +'<button class="b-save" id="aSave" style="display:none">Save changes</button>'
+    +'<button class="b-cancel" id="aCancel" style="display:none">Cancel</button>';
+  document.body.appendChild(bar);
+  bar.classList.add('show');
+
+  var status=bar.querySelector('#aStatus');
+  var pwdInput=bar.querySelector('#aPwd');
+  var btnEdit=bar.querySelector('#aEdit');
+  var btnSave=bar.querySelector('#aSave');
+  var btnCancel=bar.querySelector('#aCancel');
+
+  /* ── Image picker modal ── */
+  var modal=document.createElement('div');
+  modal.id='adminImgModal';
+  modal.innerHTML=''
+    +'<div class="aim-box">'
+    +'  <div class="aim-title">Change image</div>'
+    +'  <label>Image URL</label>'
+    +'  <input id="aimUrl" type="text" placeholder="https://... paste an image link" autocomplete="off">'
+    +'  <div class="aim-or">\u2014 or \u2014</div>'
+    +'  <button class="aim-upload" id="aimUploadBtn" type="button">\u2934 Upload from device</button>'
+    +'  <input id="aimFile" type="file" accept="image/*" style="display:none">'
+    +'  <div class="aim-note" id="aimNote"></div>'
+    +'  <div class="aim-prev"><span class="aim-ph">Preview</span></div>'
+    +'  <div class="aim-actions">'
+    +'    <button class="aim-cancel" id="aimCancel">Cancel</button>'
+    +'    <button class="aim-apply" id="aimApply">Apply</button>'
+    +'  </div>'
+    +'</div>';
+  document.body.appendChild(modal);
+
+  var aimUrl=modal.querySelector('#aimUrl');
+  var aimPrev=modal.querySelector('.aim-prev');
+  var aimApply=modal.querySelector('#aimApply');
+  var aimCancel=modal.querySelector('#aimCancel');
+  var aimUploadBtn=modal.querySelector('#aimUploadBtn');
+  var aimFile=modal.querySelector('#aimFile');
+  var aimNote=modal.querySelector('#aimNote');
+  var currentImg=null, pendingUpload=null;
+
+  function renderPreview(url){
+    if(url){ aimPrev.innerHTML='<img alt="preview" src="'+url.replace(/"/g,'&quot;')+'">'; }
+    else { aimPrev.innerHTML='<span class="aim-ph">Preview</span>'; }
+  }
+  function setNote(msg,isErr){ aimNote.textContent=msg||''; aimNote.className='aim-note'+(isErr?' err':''); }
+
+  function compressImage(file,maxDim,quality){
+    return new Promise(function(resolve,reject){
+      var reader=new FileReader();
+      reader.onload=function(){
+        var img=new Image();
+        img.onload=function(){
+          var w=img.width,h=img.height;
+          if(w>maxDim||h>maxDim){
+            if(w>=h){ h=Math.round(h*maxDim/w); w=maxDim; }
+            else { w=Math.round(w*maxDim/h); h=maxDim; }
+          }
+          var c=document.createElement('canvas'); c.width=w; c.height=h;
+          c.getContext('2d').drawImage(img,0,0,w,h);
+          try{ resolve(c.toDataURL('image/jpeg',quality)); }catch(err){ reject(err); }
+        };
+        img.onerror=function(){ reject(new Error('decode')); };
+        img.src=reader.result;
+      };
+      reader.onerror=function(){ reject(new Error('read')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  aimUploadBtn.addEventListener('click',function(){ aimFile.value=''; aimFile.click(); });
+  aimFile.addEventListener('change',function(){
+    var f=aimFile.files&&aimFile.files[0]; if(!f) return;
+    setNote('Processing image\u2026',false);
+    compressImage(f,1280,0.8).then(function(dataUrl){
+      pendingUpload=dataUrl; aimUrl.value=''; renderPreview(dataUrl);
+      var kb=Math.round((dataUrl.length*3/4)/1024);
+      setNote('Ready: '+f.name+' (~'+kb+' KB). Click Apply.',false);
+    }).catch(function(){ setNote('Could not read that image. Try a JPG or PNG.',true); });
+  });
+
+  function openImgEditor(img){
+    currentImg=img; pendingUpload=null; setNote('',false);
+    var cur=img.getAttribute('src')||'';
+    aimUrl.value=cur; renderPreview(cur);
+    modal.classList.add('show'); aimUrl.focus(); aimUrl.select();
+  }
+  function closeImgEditor(){ modal.classList.remove('show'); currentImg=null; pendingUpload=null; }
+
+  aimUrl.addEventListener('input',function(){ pendingUpload=null; setNote('',false); renderPreview(aimUrl.value.trim()); });
+  aimApply.addEventListener('click',function(){
+    if(currentImg){
+      var u=pendingUpload||aimUrl.value.trim();
+      if(u){ currentImg.setAttribute('src',u); currentImg.src=u; }
+    }
+    closeImgEditor();
+  });
+  aimCancel.addEventListener('click',closeImgEditor);
+  modal.addEventListener('click',function(e){ if(e.target===modal) closeImgEditor(); });
+
+  /* Stop accordion toggle while editing */
+  document.querySelectorAll('.qa-header').forEach(function(q){
+    q.addEventListener('click',function(e){ if(editing) e.stopImmediatePropagation(); },true);
+  });
+
+  /* Image box click → open picker */
+  document.querySelectorAll(IMG_BOXES).forEach(function(box){
+    var img=box.querySelector('img'); if(!img) return;
+    box.addEventListener('click',function(e){
+      if(!editing) return;
+      if(e.target.closest('[contenteditable="true"]')) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      openImgEditor(img);
+    },true);
+  });
+
+  function setEditable(on){
+    document.querySelectorAll(EDITABLE).forEach(function(el){
+      if(on) el.setAttribute('contenteditable','true');
+      else   el.removeAttribute('contenteditable');
+    });
+    document.querySelectorAll(IMG_BOXES).forEach(function(box){
+      if(!box.querySelector('img')) return;
+      if(on) box.classList.add('admin-imgbox');
+      else   box.classList.remove('admin-imgbox');
+    });
+    document.body.classList.toggle('admin-editing',on);
+  }
+
+  function enterEdit(){
+    pwd=pwdInput.value;
+    if(!pwd){ status.textContent='Enter the password first'; pwdInput.focus(); return; }
+    editing=true; setEditable(true);
+    btnEdit.style.display='none'; pwdInput.style.display='none';
+    btnSave.style.display=''; btnCancel.style.display='';
+    status.textContent='Editing \u2014 click text to edit, click an image to swap it';
+  }
+  function exitEdit(reload){
+    editing=false; setEditable(false);
+    btnEdit.style.display=''; pwdInput.style.display='';
+    btnSave.style.display='none'; btnCancel.style.display='none';
+    if(reload) location.reload();
+  }
+
+  function serialize(){
+    var clone=document.documentElement.cloneNode(true);
+    clone.querySelectorAll('[contenteditable]').forEach(function(el){el.removeAttribute('contenteditable');});
+    clone.querySelectorAll('.admin-imgbox').forEach(function(el){el.classList.remove('admin-imgbox');});
+    var bd=clone.querySelector('body'); if(bd) bd.classList.remove('admin-editing');
+    var ab=clone.querySelector('#adminBar'); if(ab&&ab.parentNode) ab.parentNode.removeChild(ab);
+    var im=clone.querySelector('#adminImgModal'); if(im&&im.parentNode) im.parentNode.removeChild(im);
+    return '<!DOCTYPE html>\n'+clone.outerHTML;
+  }
+
+  function save(){
+    status.textContent='Saving\u2026'; btnSave.disabled=true;
+    fetch('/api/save',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({password:pwd, html:serialize()})
+    })
+    .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
+    .then(function(res){
+      btnSave.disabled=false;
+      if(res.ok){ status.textContent='\u2713 Saved! Live for everyone in ~30s.'; exitEdit(false); }
+      else { status.textContent='Error: '+((res.j&&res.j.error)||'save failed'); }
+    })
+    .catch(function(err){ btnSave.disabled=false; status.textContent='Network error: '+err.message; });
+  }
+
+  btnEdit.addEventListener('click',enterEdit);
+  btnSave.addEventListener('click',save);
+  btnCancel.addEventListener('click',function(){ exitEdit(true); });
+})();
+</script>
+
 </body>
 </html>
