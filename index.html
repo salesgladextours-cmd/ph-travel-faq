@@ -1334,6 +1334,7 @@ window.addEventListener('scroll', () => {
 
   /* Image containers */
   var IMG_BOXES = ['.dest-hero','.photo-item','.tour-card','.master-cover'].join(',');
+  var IMG_EDITABLE_SELECTOR = IMG_BOXES + ', img';
 
   var pwd=null, editing=false;
 
@@ -1451,8 +1452,9 @@ window.addEventListener('scroll', () => {
   });
 
   /* Image box click → open picker */
-  document.querySelectorAll(IMG_BOXES).forEach(function(box){
-    var img=box.querySelector('img'); if(!img) return;
+  document.querySelectorAll(IMG_EDITABLE_SELECTOR).forEach(function(box){
+    var img = box.tagName && box.tagName.toLowerCase() === 'img' ? box : box.querySelector('img');
+    if(!img) return;
     box.addEventListener('click',function(e){
       if(!editing) return;
       // Let clicks on editable text pass through
@@ -1469,8 +1471,14 @@ window.addEventListener('scroll', () => {
       if(on) el.setAttribute('contenteditable','true');
       else   el.removeAttribute('contenteditable');
     });
-    document.querySelectorAll(IMG_BOXES).forEach(function(box){
-      if(!box.querySelector('img')) return;
+    document.querySelectorAll(IMG_EDITABLE_SELECTOR).forEach(function(box){
+      if(!box.querySelector && box.tagName && box.tagName.toLowerCase() === 'img') {
+        if(on) box.classList.add('admin-imgbox');
+        else   box.classList.remove('admin-imgbox');
+        return;
+      }
+      var img = box.querySelector ? box.querySelector('img') : null;
+      if(!img) return;
       if(on) box.classList.add('admin-imgbox');
       else   box.classList.remove('admin-imgbox');
     });
