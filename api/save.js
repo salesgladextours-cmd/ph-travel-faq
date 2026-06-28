@@ -11,7 +11,7 @@ module.exports = async function handler(req, res) {
   }
 
   const OWNER  = process.env.GH_OWNER  || 'salesgladextours-cmd';
-  const REPO   = process.env.GH_REPO   || 'ph-travel-faq-sales-guide';
+  const REPO   = process.env.GH_REPO   || 'ph-travel-faq';
   const PATH   = process.env.GH_PATH   || 'index.html';
   const BRANCH = process.env.GH_BRANCH || 'main';
   const TOKEN  = process.env.GITHUB_TOKEN;
