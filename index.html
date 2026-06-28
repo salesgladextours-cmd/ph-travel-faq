@@ -1482,37 +1482,6 @@ window.addEventListener('scroll', () => {
     document.body.classList.toggle('admin-editing',on);
   }
 
-  function makeCardEditable(card) {
-    const img = card.querySelector('img');
-    if (!img) return;
-
-    img.style.cursor = 'pointer';
-
-    img.addEventListener('click', function (e) {
-      e.stopPropagation(); // prevent accordion toggle
-
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-
-      input.onchange = function () {
-        const file = input.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function (ev) {
-          img.src = ev.target.result;
-          img.onerror = null; // clear fallback since it's now local
-          card.style.background = 'transparent';
-        };
-        reader.readAsDataURL(file);
-      };
-
-      input.click();
-    });
-  }
-
-  document.querySelectorAll('.tour-card').forEach(makeCardEditable);
-
   function enterEdit(){
     pwd=pwdInput.value;
     if(!pwd){ status.textContent='Enter the password first'; pwdInput.focus(); return; }
